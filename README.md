@@ -29,3 +29,7 @@ qm create <NUMERO DA MÁQUINA> \
  --net0 virtio,bridge=vmbr1,tag=11
 ```
 
+- Comando para importar o disco:
+```bash
+qm importdisk 150 /tmp/jammy-server-cloudimg-amd64.img VOL-01
+```
