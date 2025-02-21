@@ -67,6 +67,11 @@ qm disk resize 150 scsi0 +30G
 qm set 150 --cicustom "vendor=local:snippets/vendor.yaml"
 ```
 
+- Template:
+```bash
+qm template 150
+```
+
 ## Criação do Cluster HA
 
 - Habilitar o modo HA na máquina master e criar o primeiro node:
@@ -102,12 +107,4 @@ microk8s enable metallb
 - Passe um range de ip como esse:
 ```bash
 192.168.1.200-192.168.1.220
-```
-
-
-
-
-- Template:
-```bash
-qm template 150
 ```
