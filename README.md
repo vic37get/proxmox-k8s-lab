@@ -67,6 +67,46 @@ qm disk resize 150 scsi0 +30G
 qm set 150 --cicustom "vendor=local:snippets/vendor.yaml"
 ```
 
+## Criação do Cluster HA
+
+- Habilitar o modo HA na máquina master e criar o primeiro node:
+```bash
+microk8s enable ha-cluster
+microk8s add-node
+```
+Ele vai devolver algo parecido como 
+```bash
+<IP-MESTRE>:25000/<TOKEN>
+```
+- Após isso, conectar as outras máquinas ao cluster dessa forma:
+```bash
+microk8s join <IP-MESTRE>:25000/<TOKEN>
+```
+
+- Visualizando se as VMs estão no cluster, na primeira VM execute:
+```bash
+microk8s kubectl get nodes
+```
+- Vai aparecer algo assim:
+```bash
+NAME      STATUS   ROLES    AGE   VERSION
+vm1       Ready    <none>   10m   v1.27.0
+vm2       Ready    <none>   5m    v1.27.0
+vm3       Ready    <none>   5m    v1.27.0
+```
+
+- Configurando um LoadBalancer para acessar os serviços de fora:
+```bash
+microk8s enable metallb
+```
+- Passe um range de ip como esse:
+```bash
+192.168.1.200-192.168.1.220
+```
+
+
+
+
 - Template:
 ```bash
 qm template 150
